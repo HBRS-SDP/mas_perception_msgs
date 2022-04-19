@@ -1,7 +1,7 @@
-float32 filter_minDistance
-float32 filter_maxDistance
-float32 filter_minAngle
-float32 filter_maxAngle
+float32 filter_mindistance
+float32 filter_maxdistance
+float32 filter_minangle
+float32 filter_maxangle
 ---
 float32 center
 float32 a

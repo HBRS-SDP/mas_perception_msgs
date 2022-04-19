@@ -1,9 +1,9 @@
 string identity                         # unique string that identify the person
 string name                             # given name, e.g. 'John Doe'
 float32 age
-mas_perception_msgs/Face face
+Face face
 
-mas_perception_msgs/ObjectView[] views    # extracted views of the person (RGB image, point cloud, image embedding);
+ObjectView[] views    # extracted views of the person (RGB image, point cloud, image embedding);
                                           # an array since we may have multiple views of the same person
 
 string[] attribute_names                # e.g. gender, emotion,...
@@ -15,7 +15,7 @@ geometry_msgs/PoseStamped pose          # 3D pose of the detected person
 # fields used by `mcr_people_tracking`, `mcr_leg_detection`, and `mdr_follow_person`
 # potentially removable since the packages themselves are old and not well-maintained and possibly overlapping
 # with 'wg-perception/people'
-Header header
+std_msgs/Header header
 uint32 id
 bool is_tracked                         # is the user tracked
 bool is_occluded                        # is the user occluded

@@ -1,6 +1,6 @@
 # Empty Goal
 ---
 # Result
-mas_perception_msgs/Plane[] planes      # planes containing detected objects
+Plane[] planes      # planes containing detected objects
 ---
 # Empty Feedback

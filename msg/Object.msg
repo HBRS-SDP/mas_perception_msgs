@@ -25,10 +25,10 @@ NamedShape shape
 # View representation including an RGB image of the object, a point cloud,
 # and potentially an embedding of the image. An array since we may have
 # multiple views of the same object
-mas_perception_msgs/ObjectView[] views
+ObjectView[] views
 
 # The bounding box of the object
-mas_perception_msgs/BoundingBox bounding_box
+BoundingBox bounding_box
 
 # The ROI of image (2D BBox)
 sensor_msgs/RegionOfInterest roi

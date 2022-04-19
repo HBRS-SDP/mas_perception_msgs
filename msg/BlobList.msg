@@ -1,4 +1,4 @@
-Header header
+std_msgs/Header header
 
 # Array of Blobs
-mas_perception_msgs/Blob[] blobs
+Blob[] blobs

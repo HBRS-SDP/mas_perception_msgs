@@ -1,6 +1,6 @@
 ---
 # Time stamp when the objects have been recorded
-time stamp
+builtin_interfaces/Time stamp
 
 # List of all recorded objects
-mas_perception_msgs/Object[] objects
+Object[] objects

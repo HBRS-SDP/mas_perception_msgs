@@ -1,7 +1,7 @@
 ########################
 # Plane Geometry Info
 
-Header header
+std_msgs/Header header
 
 # Plane coefficients as described in http://mathworld.wolfram.com/HessianNormalForm.html
 # first three values are the normalized normal vector
@@ -14,7 +14,7 @@ geometry_msgs/Point32[] convex_hull
 geometry_msgs/Point32 plane_point
 
 # Range of x, y coordinates
-mas_perception_msgs/BoundingBox2D limits
+BoundingBox2D limits
 
 ########################
 # Plane name
@@ -22,5 +22,5 @@ string name
 
 ########################
 # Objects associated with plane
-mas_perception_msgs/ObjectList object_list
+ObjectList object_list
 

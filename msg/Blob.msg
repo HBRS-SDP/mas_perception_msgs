@@ -1,4 +1,4 @@
-Header header
+std_msgs/Header header
 
 # Blob 2D Pose
 geometry_msgs/Pose2D blob_pose

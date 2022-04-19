@@ -1,7 +1,7 @@
-float32 leftEyeCenterX      # position of the left eye of the face
-float32 leftEyeCenterY
-float32 rightEyeCenterX     # position of the right eye of the face
-float32 rightEyeCenterY
+float32 lefteyecenterx      # position of the left eye of the face
+float32 lefteyecentery
+float32 righteyecenterx     # position of the right eye of the face
+float32 righteyecentery
 
-mas_perception_msgs/ObjectView[] views    # extracted views of the face (RGB image, point cloud, image embedding);
-										  # an array since we may have multiple views of the same person
+ObjectView[] views          # extracted views of the face (RGB image, point cloud, image embedding);
+			     # an array since we may have multiple views of the same person
