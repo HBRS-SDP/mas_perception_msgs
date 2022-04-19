@@ -1,122 +1,101 @@
-cmake_minimum_required(VERSION 3.0.2)
+cmake_minimum_required(VERSION 3.5)
 project(mas_perception_msgs)
 
-find_package(catkin REQUIRED
-  COMPONENTS
-    genmsg
-    actionlib_msgs
-    actionlib
-    geometry_msgs
-    message_generation
-    roscpp
-    rospy
-    sensor_msgs
-    std_msgs
-    visualization_msgs
-)
-
-add_action_files(DIRECTORY action
-  FILES
-    DetectScene.action
-    DetectObjects.action
-)
-
-add_message_files(
-  FILES
-    BoundingBox.msg
-    BoundingBoxList.msg
-    BoundingBox2D.msg
-    Cavity.msg
-    PeopleScene.msg
-    Face.msg
-    ImageList.msg
-    LaserScanSegment.msg
-    LaserScanSegmentList.msg
-    MatchingErrorStamped.msg
-    Object.msg
-    ObjectEmbedding.msg
-    ObjectList.msg
-    ObjectView.msg
-    NamedColor.msg
-    NamedShape.msg
-    Person.msg
-    PersonList.msg
-    Plane.msg
-    PlaneList.msg
-    PlanarPolygon.msg
-    PointCloud2List.msg
-    Blob.msg
-    BlobList.msg
-)
-
-add_service_files(
-  FILES
-    AccumulateTabletopCloud.srv
-    AnalyzeCloudColor.srv
-    BaseScanLinearRegression.srv
-    ClusterTabletopCloud.srv
-    FindWorkspace.srv
-    GetPersonList.srv
-    GetObjectList.srv
-    GetFaceName.srv
-    GetFacialExpression.srv
-    GetNearestObject.srv
-    GetSegmentedImage.srv
-    IsPersonInFront.srv
-    MakeBoundingBoxes.srv
-    PublishGoal.srv
-    RecognizeImage.srv
-    RecognizeObject.srv
-    SetFaceName.srv
-)
-
-generate_messages(
-  DEPENDENCIES
-    geometry_msgs
-    sensor_msgs
-    std_msgs
-    actionlib_msgs
-)
-
-catkin_package(
-  CATKIN_DEPENDS
-    geometry_msgs
-    message_runtime
-    sensor_msgs
-    std_msgs
-)
-
-include_directories(
-  ${catkin_INCLUDE_DIRS}
-)
-
-### EXECUTABLES ###
-add_executable(object_msg_visualizer_node
-  ros/src/object_msg_visualizer_node.cpp
-)
-add_dependencies(object_msg_visualizer_node
-  ${catkin_EXPORTED_TARGETS}
-  ${PROJECT_NAME}_gencpp
-)
-target_link_libraries(object_msg_visualizer_node
-  ${catkin_LIBRARIES}
-)
-
-### TESTS
-if(CATKIN_ENABLE_TESTING)
-  find_package(roslaunch REQUIRED)
-
-  roslaunch_add_file_check(ros/launch)
+# Default to C99
+if(NOT CMAKE_C_STANDARD)
+  set(CMAKE_C_STANDARD 99)
 endif()
 
+# Default to C++14
+if(NOT CMAKE_CXX_STANDARD)
+  set(CMAKE_CXX_STANDARD 14)
+endif()
 
-### INSTALLS
-install(
-  TARGETS
-    object_msg_visualizer_node
-  RUNTIME DESTINATION ${CATKIN_PACKAGE_BIN_DESTINATION}
+if(CMAKE_COMPILER_IS_GNUCXX OR CMAKE_CXX_COMPILER_ID MATCHES "Clang")
+  add_compile_options(-Wall -Wextra -Wpedantic)
+endif()
+
+# find dependencies
+find_package(ament_cmake REQUIRED)
+# uncomment the following section in order to fill in
+# further dependencies manually.
+# find_package(<dependency> REQUIRED)
+find_package(builtin_interfaces REQUIRED)
+find_package(std_msgs REQUIRED)
+find_package(sensor_msgs REQUIRED)
+find_package(geometry_msgs REQUIRED)
+find_package(rosidl_default_generators REQUIRED)
+
+set(msg_files
+  "msg/Blob.msg"
+  "msg/BlobList.msg"
+  "msg/BoundingBox.msg"
+  "msg/BoundingBoxList.msg"
+  "msg/BoundingBox2D.msg"
+  "msg/Cavity.msg"
+  "msg/PeopleScene.msg"
+  "msg/Face.msg"
+  "msg/ImageList.msg"
+  "msg/LaserScanSegment.msg"
+  "msg/LaserScanSegmentList.msg"
+  "msg/MatchingErrorStamped.msg"
+  "msg/Object.msg"
+  "msg/ObjectEmbedding.msg"
+  "msg/ObjectList.msg"
+  "msg/ObjectView.msg"
+  "msg/NamedColor.msg"
+  "msg/NamedShape.msg"
+  "msg/Person.msg"
+  "msg/PersonList.msg"
+  "msg/Plane.msg"
+  "msg/PlaneList.msg"
+  "msg/PlanarPolygon.msg"
+  "msg/PointCloud2List.msg"
 )
 
-install(DIRECTORY ros/launch
-  DESTINATION ${CATKIN_PACKAGE_SHARE_DESTINATION}/ros/launch
+set(srv_files
+  "srv/AccumulateTabletopCloud.srv"
+  "srv/AnalyzeCloudColor.srv"
+  "srv/BaseScanLinearRegression.srv"
+  "srv/ClusterTabletopCloud.srv"
+  "srv/FindWorkspace.srv"
+  "srv/GetPersonList.srv"
+  "srv/GetObjectList.srv"
+  "srv/GetFaceName.srv"
+  "srv/GetFacialExpression.srv"
+  "srv/GetNearestObject.srv"
+  "srv/GetSegmentedImage.srv"
+  "srv/IsPersonInFront.srv"
+  "srv/MakeBoundingBoxes.srv"
+  "srv/PublishGoal.srv"
+  "srv/RecognizeImage.srv"
+  "srv/RecognizeObject.srv"
+  "srv/SetFaceName.srv"
 )
+
+set(action_files
+  "action/DetectObjects.action"
+  "action/DetectScene.action"
+)
+
+rosidl_generate_interfaces(${PROJECT_NAME}
+  ${msg_files}
+  ${srv_files}
+  ${action_files}
+  DEPENDENCIES builtin_interfaces std_msgs geometry_msgs sensor_msgs
+)
+
+ament_export_dependencies(rosidl_default_runtime)
+
+if(BUILD_TESTING)
+  find_package(ament_lint_auto REQUIRED)
+  # the following line skips the linter which checks for copyrights
+  # uncomment the line when a copyright and license is not present in all source files
+  #set(ament_cmake_copyright_FOUND TRUE)
+  # the following line skips cpplint (only works in a git repo)
+  # uncomment the line when this package is not in a git repo
+  #set(ament_cmake_cpplint_FOUND TRUE)
+  ament_lint_auto_find_test_dependencies()
+endif()
+
+ament_package()
