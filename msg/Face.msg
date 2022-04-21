@@ -1,7 +1,7 @@
-float32 lefteyecenterx      # position of the left eye of the face
-float32 lefteyecentery
-float32 righteyecenterx     # position of the right eye of the face
-float32 righteyecentery
+float32 left_eye_center_x      # position of the left eye of the face
+float32 left_eye_center_y
+float32 right_eye_center_x     # position of the right eye of the face
+float32 right_eye_center_y
 
 ObjectView[] views          # extracted views of the face (RGB image, point cloud, image embedding);
 			     # an array since we may have multiple views of the same person
